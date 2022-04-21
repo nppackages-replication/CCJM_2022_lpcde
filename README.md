@@ -10,11 +10,9 @@ https://nppackages.github.io/replication
 
 - R implementation: [main](CCFF_2021_Binscatter.R)
 
-
 ## Reference
 
-- Cattaneo, Chandak, Jansson and Ma (2022): [Boundary Adaptive Local Polynomial Conditional Density Estimators](https://nppackages.github.io/references/Cattaneo-Chandak-Jansson-Ma_2022_LPCondDen.pdf).<br>
-Working paper.<br>
-[Supplemental appendix](https://nppackages.github.io/references/Cattaneo-Chandak-Jansson-Ma_2022_LPCondDen--Supplemental.pdf).
+- Cattaneo, Chandak, Jansson and Ma (2022): [lpcde: Estimation and Inference for Local Polynomial Conditional Density Estimators](https://nppackages.github.io/references/Cattaneo-Chandak-Jansson-Ma_2022_lpcde.pdf).<br>
+Working paper.
 
 <br><br>
