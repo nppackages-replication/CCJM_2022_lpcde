@@ -1,8 +1,0 @@
-#+Title: lpcde Software Article Replication Repository
-#+Author: Rajita Chandak
-
-** DONE plot script
-** DONE inline script
-** DONE table 2 script
-** DONE table 3 script
-** DONE table 4 script
