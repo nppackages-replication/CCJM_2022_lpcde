@@ -32,8 +32,8 @@ bw_testing = function(s){
                       bw=bw_star)
 
   # extracting values of interest
-  f_hat = est$Estimate[,3]/2
-  f_hat_rbc = est$Estimate[,4]/2
+  f_hat = est$Estimate[,3]
+  f_hat_rbc = est$Estimate[,4]
   bias = (f_hat - true_dens)
   bias_rbc = (f_hat_rbc - true_dens)
   sd = est$Estimate[,5]
