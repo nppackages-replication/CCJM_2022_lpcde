@@ -1,35 +1,25 @@
-# Script for generating table 4 in Cattaneo, Chandak, Jansson and Ma (2022)
+# Script for generating table 1 in Cattaneo, Chandak, Jansson and Ma (2022)
 
 #parameters
 n = 2000
-num_sims = 1000
-y = 1.0
+num_sims = 100
+y = 0.0
 x = 0.0
 #true density function
-true_dens =  stats::dnorm(y, mean = -0.1*x, sd=sqrt(1-0.1^2))
+true_dens = stats::dnorm(y, mean = 0, sd=1)
 
 #grid for bandwidth range
-h_grid = c(0.8, 0.9, 1, 1.1, 1.2)
+h_grid = c(0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5)*0.5
 
 bw_testing = function(s){
   print(s)
   # simulating data
-  data = mvtnorm::rmvnorm(5*n, sigma = matrix(c(2, -0.1, -0.1, 2), nrow=2))
-  data = data[abs(data[,1])<=1,]
-  data = data[abs(data[,2])<=1,]
-  data = data[1:n, ]
-  x_data = as.matrix(data[, 2])
-  y_data = as.matrix(data[, 1])
+  x_data = matrix(rnorm(n, mean=0, sd=1))
+  y_data = matrix(rnorm(n, mean=x_data, sd=1))
 
-
-  #bandiwidth selection
-  bw_star = h*lpcde::lpbwcde(y_data=y_data, x_data=x_data, y_grid=y, x=x,
-                             bw_type="imse-rot")$BW[,2]
-  #bw_star = h*0.5
-
+  bw_star=h
   #density estimation
-  est =  lpcde::lpcde(y_data=y_data, x_data=x_data, y_grid=y, x=x,
-                      bw=bw_star)
+  est =  lpcde::lpcde(y_data=y_data, x_data=x_data, y_grid=y, x=x, bw=bw_star, rbc=TRUE)
 
   # extracting values of interest
   f_hat = est$Estimate[,3]
@@ -63,9 +53,10 @@ for (i in 1:length(h_grid)){
   }
 table_data = rbind(table_data, (colSums(int_avg)/num_sims))
 }
-
+table_data = table_data[2:nrow(table_data), ]
 table_data[, 2] = abs(table_data[,2])
 colnames(table_data) = c("BW", "bias", "sd", "rmse", "WBC CE", "RBC CE",
                          "WBC AL", "RBC AL")
+rownames(table_data) = h_grid/0.5
 #print table
 table_data
